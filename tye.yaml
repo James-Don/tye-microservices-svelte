@@ -1,0 +1,24 @@
+﻿
+name: tye-user-services
+registry: dapracr.azurecr.io
+services:
+- name: postgres
+  image:  postgres
+  env:
+  - name: POSTGRES_PASSWORD
+    value: "G0fishing"
+  bindings:
+  - port: 5432
+    connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
+- name: user-view
+  project: user-view/user-view.csproj
+  bindings:
+    - port: 9000
+- name: user-search
+  project: user-search/user-search.csproj
+  bindings:
+    - port: 9001
+- name: user-signup
+  project: user-signup/user-signup.csproj
+  bindings:
+    - port: 9002
